@@ -79,7 +79,7 @@ const Challenge = () => {
             <div className="w-1/3 p-8 rounded-r-lg shadow-md">
               <h2 className="text-2xl font-bold mb-4">{submittedData.name} Information:</h2>
               <div className="mb-4">
-                <strong>Picture:</strong>
+                
                 {submittedData.picture && (
                   <img
                     src={URL.createObjectURL(submittedData.picture)}
