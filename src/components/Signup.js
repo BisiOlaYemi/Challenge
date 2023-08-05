@@ -35,7 +35,7 @@ const Signup = () => {
         console.error('Error creating user:', error);
       } else {
         console.log('User created successfully:', user);
-        router.push('/login');
+        router.push('/account');
       }
     } catch (error) {
       console.error('Error creating user:', error);
