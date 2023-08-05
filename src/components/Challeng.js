@@ -64,25 +64,6 @@ const Challenge = () => {
                     />
                     <ErrorMessage name="name" component="div" className="text-red-500 text-xs mt-1" />
                   </div>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="phoneNumber"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                      Phone Number
-                    </label>
-                    <Field
-                      type="text"
-                      name="phoneNumber"
-                      id="phoneNumber"
-                      className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                    <ErrorMessage
-                      name="phoneNumber"
-                      component="div"
-                      className="text-red-500 text-xs mt-1"
-                    />
-                  </div>
                   <div className="flex justify-center">
                     <button
                       type="submit"
