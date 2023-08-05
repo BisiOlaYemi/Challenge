@@ -9,7 +9,6 @@ const Challenge = () => {
   const validationSchema = Yup.object({
     picture: Yup.mixed().required('Please upload a picture'),
     name: Yup.string().required('Please enter your name'),
-    phoneNumber: Yup.string().required('Please enter your phone number'),
   });
 
   const handleSubmit = (values, { setSubmitting }) => {
@@ -54,7 +53,7 @@ const Challenge = () => {
                   </div>
                   <div className="mb-4">
                     <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-                      Name
+                     Specify your Name
                     </label>
                     <Field
                       type="text"
@@ -63,25 +62,6 @@ const Challenge = () => {
                       className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                     <ErrorMessage name="name" component="div" className="text-red-500 text-xs mt-1" />
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="phoneNumber"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                      Phone Number
-                    </label>
-                    <Field
-                      type="text"
-                      name="phoneNumber"
-                      id="phoneNumber"
-                      className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                    <ErrorMessage
-                      name="phoneNumber"
-                      component="div"
-                      className="text-red-500 text-xs mt-1"
-                    />
                   </div>
                   <div className="flex justify-center">
                     <button
@@ -97,7 +77,7 @@ const Challenge = () => {
             </Formik>
           ) : (
             <div className="w-1/3 p-8 rounded-r-lg shadow-md">
-              <h2 className="text-2xl font-bold mb-4">Submitted Information:</h2>
+              <h2 className="text-2xl font-bold mb-4">{submittedData.name} Information:</h2>
               <div className="mb-4">
                 <strong>Picture:</strong>
                 {submittedData.picture && (
@@ -111,9 +91,7 @@ const Challenge = () => {
               <p>
                 <strong>Name:</strong> {submittedData.name}
               </p>
-              <p>
-                <strong>Phone Number:</strong> {submittedData.phoneNumber}
-              </p>
+              
             </div>
           )}
         </div>
