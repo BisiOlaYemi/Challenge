@@ -29,22 +29,26 @@ const LoginForm = () => {
       const { data, error } = await supabase
         .from('users')
         .select()
-        .eq('username', formData.username) 
-        .eq('password', formData.password) 
+        .match({ username: formData.username, password: formData.password })
         .single();
-
-        if (error) {
-          console.error('Error logging in:', error);
-        } else if (!data) {
-          console.log('Invalid credentials');
-        } else {
-          window.alert('Logged in successfully!');
-          router.push('/dashboard');
-        }
-      } catch (error) {
+  
+      if (error) {
         console.error('Error logging in:', error);
+        window.alert('This user does not exist, Please enter a valid credential');
+      } else if (!data) {
+        console.log('Invalid credentials');
+        window.alert('Invalid credentials. Please check your username and password.');
+      } else {
+        console.log('Logged in successfully:', data);
+        window.alert('Logged in successfully!');
+        router.push('/dashboard');
       }
-    };
+    } catch (error) {
+      console.error('Error logging in:', error);
+      window.alert('An error occurred while logging in. Please try again later.');
+    }
+  };
+  
 
   return (
     <div className="w-screen h-screen grid grid-cols-1 md:grid-cols-2">
