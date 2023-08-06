@@ -33,18 +33,18 @@ const LoginForm = () => {
         .eq('password', formData.password) 
         .single();
 
-      if (error) {
+        if (error) {
+          console.error('Error logging in:', error);
+        } else if (!data) {
+          console.log('Invalid credentials');
+        } else {
+          window.alert('Logged in successfully!');
+          router.push('/dashboard');
+        }
+      } catch (error) {
         console.error('Error logging in:', error);
-      } else if (!data) {
-        console.log('Invalid credentials');
-      } else {
-        console.log('Logged in successfully:', data);
-        router.push('/dashboard'); 
       }
-    } catch (error) {
-      console.error('Error logging in:', error);
-    }
-  };
+    };
 
   return (
     <div className="w-screen h-screen grid grid-cols-1 md:grid-cols-2">
@@ -70,7 +70,7 @@ const LoginForm = () => {
                   name="username"
                   placeholder="Username"
                   required
-                  onChange={handleChange} // Add the onChange event handler here
+                  onChange={handleChange} 
                 />
               </div>
               <div className="mb-4">
@@ -84,7 +84,7 @@ const LoginForm = () => {
                   name="password"
                   placeholder="Password"
                   required
-                  onChange={handleChange} // Add the onChange event handler here
+                  onChange={handleChange} 
                 />
               </div>
               <div className="flex justify-center">
