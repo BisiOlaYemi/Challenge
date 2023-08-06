@@ -24,23 +24,40 @@ const Signup = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const { user, error } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
-      });
+  event.preventDefault();
+  try {
+    // Sign up the user using Supabase auth.signUp
+    const { user, error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+    });
 
-      if (error) {
-        console.error('Error creating user:', error);
+    if (error) {
+      console.error('Error creating user:', error);
+    } else {
+      console.log('User created successfully:', user);
+      // Store the user details in the Supabase database
+      const { data, error: dbError } = await supabase.from('users').insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          username: formData.username,
+          password: formData.password,
+        },
+      ]);
+
+      if (dbError) {
+        console.error('Error inserting user data:', dbError);
       } else {
-        console.log('User created successfully:', user);
+        console.log('User data inserted successfully:', data);
         router.push('/account');
       }
-    } catch (error) {
-      console.error('Error creating user:', error);
     }
-  };
+  } catch (error) {
+    console.error('Error creating user:', error);
+  }
+};
+
   
   return (
     <div className="w-screen h-screen grid grid-cols-1 md:grid-cols-2">
