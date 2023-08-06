@@ -50,6 +50,7 @@ const Signup = () => {
         console.error('Error inserting user data:', dbError);
       } else {
         console.log('User data inserted successfully:', data);
+        window.alert('Signup successful! Please login to your account.');
         router.push('/account');
       }
     }
