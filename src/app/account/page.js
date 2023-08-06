@@ -1,15 +1,48 @@
 'use client'
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { NavigationEvents } from '@/components/NavigationEvents';
+import supabase from '@/lib/Supabase';
 
 const LoginForm = () => {
   const router = useRouter();
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
 
-  const handleSubmit = (event) => {
+  console.log(formData.username, formData.password);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  console.log(formData.username, formData.password);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (router) {
-      router.push('/dashboard');
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select()
+        .eq('username', formData.username) 
+        .eq('password', formData.password) 
+        .single();
+
+      if (error) {
+        console.error('Error logging in:', error);
+      } else if (!data) {
+        console.log('Invalid credentials');
+      } else {
+        console.log('Logged in successfully:', data);
+        router.push('/dashboard'); 
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
     }
   };
 
@@ -37,6 +70,7 @@ const LoginForm = () => {
                   name="username"
                   placeholder="Username"
                   required
+                  onChange={handleChange} // Add the onChange event handler here
                 />
               </div>
               <div className="mb-4">
@@ -50,6 +84,7 @@ const LoginForm = () => {
                   name="password"
                   placeholder="Password"
                   required
+                  onChange={handleChange} // Add the onChange event handler here
                 />
               </div>
               <div className="flex justify-center">
