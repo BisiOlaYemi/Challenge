@@ -124,7 +124,7 @@ const Signup = () => {
                   type="password"
                   id="password"
                   name="password"
-                  placeholder="Your Email Address"
+                  placeholder="Password"
                   required
                   onChange={handleChange} 
                 />
